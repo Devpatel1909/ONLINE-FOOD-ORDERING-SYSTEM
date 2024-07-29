@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Details - Food Junction</title>
+    <link rel="stylesheet" href="Details.css">
+</head>
+<body>
+    <div class="wrapper">
+        <form method="post" action="#">
+            <!-- <h1>Details</h1> -->
+            <div class="name">
+                <label for="name">Your name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your Name">
+            </div>
+            <div class="gender">
+                <input type="radio" id="male" value="male" name="gender">
+                <label for="male">Male</label>
+                <input type="radio" id="female" value="female" name="gender">
+                <label for="female">Female</label>
+            </div>
+            <div class="dob">
+                <label for="birthdate">Enter your date of birth:</label>
+                <input type="date" id="birthdate" name="birthdate" placeholder="Date of birth">
+            </div>
+            <div class="profession">
+                <input type="radio" id="business" value="business" name="profession">
+                <label for="business">Business Owner</label>
+                <input type="radio" id="employee" value="employee" name="profession">
+                <label for="employee">Employee (Job Holder)</label>
+                <input type="radio" id="student" value="student" name="profession">
+                <label for="student">Student</label>
+                <input type="radio" id="other" value="other" name="profession">
+                <label for="other">Other (Please Specify)</label>
+            </div>
+            <div class="profession-textarea">
+                <textarea id="other-specify" name="other-specify" placeholder="Specify Here"></textarea>
+            </div>
+            <div class="address">
+                <label for="address">Enter your current address:</label>
+                <textarea name="address" id="address" rows="4" cols="40" placeholder="Enter your address here"></textarea>
+            </div>
+            <button type="submit" class="button">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

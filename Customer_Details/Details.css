@@ -1,0 +1,96 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    box-sizing: border-box;
+    color: white; /* Set default text color to white */
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('background phot.jpg');
+    min-height: 100vh;
+    background-color: beige;
+    background-size: cover;
+    background-position: center;
+}
+
+.wrapper {
+    width: 520px;
+    background-color: rgba(0, 0, 0, 0.5); 
+    border: 10px solid rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 25px 40px 40px;
+    text-align: left;
+    margin-left: 650px; /* Adjust this value to shift the box to the right */
+}
+
+.wrapper h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.wrapper div {
+    margin-bottom: 20px;
+}
+
+.wrapper label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.wrapper input[type="text"],
+.wrapper input[type="date"],
+.wrapper textarea {
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.2); 
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: white; /* Ensure text color is white */
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Placeholder text color */
+.wrapper input[type="text"]::placeholder,
+.wrapper input[type="date"]::placeholder,
+.wrapper textarea::placeholder {
+    color: white; /* Set placeholder text color to white */
+}
+
+.wrapper .gender,
+.wrapper .profession {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.wrapper .profession-textarea {
+    margin-top: -10px; 
+    color: white; /* Ensure text color is white */
+}
+
+.wrapper .profession label,
+.wrapper .gender label {
+    margin-right: 10px;
+}
+
+.wrapper .button {
+    width: 100%;
+    height: 40px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: white; /* Background color white for the button */
+    color: black; /* Text color black for the button */
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.wrapper .button:hover {
+    background-color: #f30404;
+    color: white; /* Text color white on hover */
+}
