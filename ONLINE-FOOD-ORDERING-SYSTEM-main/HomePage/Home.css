@@ -1,0 +1,297 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background-image: url('background phot.jpg'); /* Background image */
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+header {
+    background-color: rgba(0, 0, 0, 0.7); /* Similar background to footer */
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.logo-img {
+    width: 60px; /* Smaller width for the header logo */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensures it scales down without distorting */
+    border-radius: 50%; /* Creates a circular effect */
+    border: 2px solid white; /* Optional: adds a border around the logo */
+    padding: 5px; /* Adds spacing inside the border */
+}
+
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+/* Adjust Search Bar for Centering */
+.search-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-right: 100px; /* Shift the search bar to the left */
+}
+
+.search-bar .search-icon {
+    position: absolute;
+    left: 10px;
+    font-size: 20px;
+    color: #999;
+}
+
+.search-bar input {
+    padding: 10px 50px 10px 45px; /* Increased padding for space between icon and text */
+    width: 400px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    background-color: white;
+    color: black;
+}
+
+
+.search-bar button {
+    display: none; /* No need to display the button as we just use the icon for the search functionality */
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-menu li {
+    display: inline-block;
+}
+
+.nav-menu li a {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.nav-menu li a i {
+    font-size: 20px;
+}
+
+/* Hover effect for menu items */
+.nav-menu li a:hover {
+    color: #ffe6d5;
+}
+
+/* Filter dropdown */
+.filter-options {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 60px; /* Adjust this as needed for proper positioning */
+    right: 20px;
+    background-color: white;
+    color: black;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10; /* Ensure it's on top of other elements */
+    width: 200px; /* Adjust width as needed */
+}
+
+.filter-options ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.filter-options ul li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.filter-options ul li:hover {
+    background-color: #f0f0f0; /* Hover effect for items */
+}
+
+/* Hero Section */
+.hero {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: right;
+    padding: 20px;
+}
+
+.hero-content {
+    max-width: 600px;
+    text-align: right;
+    margin-right: 50px;
+}
+
+/* Styling for the first line */
+#hero-text-1 {
+    font-size: 48px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.7); /* Subtle shadow */
+    background: linear-gradient(45deg, #ff6b6b, #feca57); /* Gradient text */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.3s ease-in-out; /* Transition for hover */
+}
+
+/* Styling for the second line */
+#hero-text-2 {
+    font-size: 24px;
+    font-weight: 300;
+    color: #ffffff;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* Lighter shadow */
+    margin-top: 10px;
+    transition: transform 0.3s ease-in-out; /* Transition for hover */
+}
+
+/* Hover effect for both lines */
+#hero-text-1:hover,
+#hero-text-2:hover {
+    transform: translateX(10px); /* Slight movement to the right on hover */
+}
+
+
+/* Animated Text Effect */
+.animated-text {
+    font-size: 48px;
+    opacity: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid white;
+    display: inline-block;
+    animation: typing 5s steps(40) 1 forwards, blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes blink-caret {
+    from {
+        border-right-color: white;
+    }
+    to {
+        border-right-color: transparent;
+    }
+}
+
+
+/* Features Section */
+.features {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+}
+
+.feature-box {
+    text-align: center;
+    width: 30%;
+}
+
+.footer {
+    background-color: rgba(0, 0, 0, 0.9); /* Dark background for the footer */
+    color: white;
+    padding: 40px 20px;
+    font-size: 14px;
+}
+
+/* Footer logo */
+.footer-logo-img {
+    width: 50px; /* Smaller width for the footer logo */
+    height: auto; /* Maintain aspect ratio */
+    object-fit: contain; /* Ensures it scales down without distorting */
+    border-radius: 50%; /* Creates a circular effect */
+    border: 2px solid white; /* Optional: adds a border around the logo */
+    padding: 5px; /* Adds spacing inside the border */
+}
+
+/* Footer styling */
+.footer {
+    background-color: rgba(0, 0, 0, 0.9); /* Dark footer background */
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-links a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 10px;
+    font-size: 14px;
+    display: inline-block;
+}
+
+.footer-links a:hover {
+    color: #ffdd57; /* Highlight color on hover */
+}
+
+.app-download p {
+    margin: 20px 0 10px 0;
+    font-weight: bold;
+}
+
+.app-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.app-icon {
+    width: 120px; /* Size for app download icons */
+    height: auto;
+}
+
+.footer-bottom {
+    margin-top: 20px;
+    border-top: 1px solid #333;
+    padding-top: 10px;
+    font-size: 12px;
+}
