@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Filter.css" />
+    <title>Food Junction - Filter Page</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="Logo.png" alt="Food Junction Logo" class="logo-img" />
+        <!-- Placeholder for logo -->
+      </div>
+      <nav>
+        <ul>
+          <li>
+            <a href="http://127.0.0.1:5500/HomePage/Home.html"
+              ><i class="bx bxs-home"></i> Home</a
+            >
+          </li>
+          <li>
+            <a href="http://127.0.0.1:5500/LoginPage/login.html"
+              ><i class="bx bxs-user"></i> Log In</a
+            >
+          </li>
+          <li>
+            <a href="http://127.0.0.1:5500/RegistrationPage/Registration.html"
+              ><i class="bx bxs-user-plus"></i> Sign Up</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <h2>Filter Options</h2>
+      <div class="filter-options">
+        <ul>
+          <li onclick="toggleSelection(this, 'veg')">Veg</li>
+          <li onclick="toggleSelection(this, 'non-veg')">Non-Veg</li>
+          <li onclick="toggleSelection(this, 'cuisines')">Cuisines</li>
+          <li onclick="toggleSelection(this, 'below-300')">Cost: Below 300</li>
+          <li onclick="toggleSelection(this, '300-600')">Cost: 300-600</li>
+          <li onclick="toggleSelection(this, 'above-600')">Cost: Above 600</li>
+          <li onclick="toggleSelection(this, 'rating')">Rating</li>
+        </ul>
+      </div>
+      <button class="apply-button" onclick="search()">Apply</button>
+      <div id="results"></div>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 Food Junction. All Rights Reserved.</p>
+    </footer>
+
+    <script src="Filter.js"></script>
+  </body>
+</html>
