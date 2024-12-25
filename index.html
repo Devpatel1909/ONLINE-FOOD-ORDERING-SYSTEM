@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login/Register</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" href="./Images/Restaurants/download.png" type="image/icon type">
+</head>
+<body>
+    
+  <div class="container">
+      <div class="loginbg">
+          <div class="box signin">
+              <h2>Already Have an Account ?</h2>
+              <button class="signinbtn" id="signupBtn">Sign in</button>
+          </div>
+          <div class="box signup">
+            <h2>Don’t Have an Account ?</h2>
+            <button class="signupbtn" id="loginBtn">Sign up</button>
+          </div>
+      </div>
+      <div class="formbx">
+        <div class="form signinform">
+            <form id="loginForm">
+                <h2>Foodies</h2>
+                <h3>Sign In</h3>
+                <input type="text" placeholder="Email" id="loginEmail">
+                <input type="password" placeholder="Password" id="loginPassword">
+                <input type="button" value="Login" onclick="logIn()">
+                <a href="#" class="forgot">Forgot password?</a>
+            </form>
+        </div>
+        <div class="form signupform">
+            <form id="signupForm">
+                <h3>Sign up</h3>
+                <input type="text" placeholder="Enter Your Name" id="signupName">
+                <input type="text" placeholder="Email" id="signupEmail">
+                <input type="date" placeholder=" Enter your Date of birth" id="signupDate">
+                <input type="password" placeholder="Password" id="signupPassword">
+                <input type="password" placeholder="Confirm password">
+                <input type="button" value="Sign Up" onclick="signUp()">
+            </form>
+        </div>
+      </div>
+  </div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
+    import { getDatabase, ref, set, onValue } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js';
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyA1nqC_pVbB7Gfg8zFPD9_bLw_SHTTYD-g",
+        authDomain: "online-food-delivry-system.firebaseapp.com",
+        databaseURL: "https://online-food-delivry-system-default-rtdb.firebaseio.com",
+        projectId: "online-food-delivry-system",
+        storageBucket: "online-food-delivry-system.firebasestorage.app",
+        messagingSenderId: "713835347104",
+        appId: "1:713835347104:web:cdeccdb1a103a113cc5dc5",
+        measurementId: "G-VV8LJFFMND"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    // Show/hide forms
+    const signinbtn = document.querySelector('.signinbtn');
+    const signupbtn = document.querySelector('.signupbtn');
+    const formbx = document.querySelector('.formbx'); 
+    const body = document.querySelector('body');
+
+    signupbtn.onclick = function() {
+        formbx.classList.add('active');
+        body.classList.add('active');
+    }
+
+    signinbtn.onclick = function() {
+        formbx.classList.remove('active');
+        body.classList.remove('active');
+    }
+
+    // Signup function
+    async function signUp() {
+        const email = document.getElementById('signupEmail').value;
+        const password = document.getElementById('signupPassword').value;
+        const name = document.getElementById('signupName').value;
+        const date = document.getElementById('signupDate').value;
+
+        try {
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            // Store additional user data in Realtime Database
+            await set(ref(db, 'users/' + user.uid), {
+                name: name,
+                email: email,
+                birth_date: date
+            });
+
+            alert("Account created successfully!");
+        } catch (error) {
+            console.error("Error creating user:", error);
+            alert(error.message);
+        }
+    }
+
+    // Login function
+    async function logIn() {
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+
+            alert("Logged in successfully!");
+            // Redirect to another page after successful login
+            const userRef = ref(db, `users/${user.uid}`);
+            onValue(userRef, (snapshot) => {
+                const data = snapshot.val();
+                console.log(data);
+                sessionStorage.setItem('name',data.name);
+                sessionStorage.setItem('email',data.email);
+            });
+            sessionStorage.setItem('email',email);
+            window.location.href = "home.html";
+        } catch (error) {
+            console.error("Error logging in:", error);
+            alert(error.message);
+        }
+    }
+
+    // Attach functions to window object to make them globally accessible
+    window.signUp = signUp;
+    window.logIn = logIn;
+</script>
+</body>
+</html>
