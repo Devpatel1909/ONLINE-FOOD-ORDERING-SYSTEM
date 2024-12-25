@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback | Foodie</title>
+    <link rel="icon" href="./Images/Restaurants/download.png" type="image/icon type">
+    <link rel="stylesheet" href="feedback.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <!-- Include the EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <a href="home.html" class="logo"><i class="fa fa-utensils"></i> Foodie</a>
+        <nav class="navbar">
+            <a href="home.html">Home</a>
+            <a href="Cart.html">Cart</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </header>
+
+    <!-- Feedback Form -->
+    <main>
+        <section class="feedback-section">
+            <div class="container">
+                <h1>We Value Your Feedback</h1>
+                <form id="feedback-form">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Your Name">
+                    
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="Your Email">
+                    
+                    <label for="message">Feedback</label>
+                    <textarea id="message" name="message" required placeholder="Describe your experience"></textarea>
+                    
+                    <button type="submit" id="submit">Submit</button>
+                </form>
+                <div id="response"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="#">Menu</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+        <p>&copy; 2024 Foodie. All rights reserved.</p>
+    </footer>
+
+    <!-- EmailJS Script -->
+    <script type="text/javascript">
+        // Initialize EmailJS with your user ID
+        (function() {
+            // https://dashboard.emailjs.com/admin/account
+            emailjs.init({
+              publicKey: "Ak6S8vvdfPPl1T1Az",
+            });
+        })();
+
+        // Submit the feedback form
+        document.getElementById('feedback-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Collect form data
+            const formData = new FormData(this);
+            const feedbackData = { 
+
+                name: formData.get('name'),
+                email: formData.get('email'),
+                message: formData.get('message'),
+            };
+
+            // Log feedback data for debugging
+            console.log(feedbackData);
+
+            // Send the feedback email using EmailJS
+            emailjs.send('service_8d2gy1i', 'template_to8v3bv', feedbackData)
+                .then(function(response) {
+                    // On success, display a success message
+                    document.getElementById('response').innerHTML = '<p>Feedback submitted successfully!</p>';
+                    document.getElementById('feedback-form').reset();
+                }, function(error) {
+                    // On failure, display an error message
+                    document.getElementById('response').innerHTML = '<p>Sorry, there was an error. Please try again later.</p>';
+                });
+        });
+    </script>
+    
+</body>
+</html>

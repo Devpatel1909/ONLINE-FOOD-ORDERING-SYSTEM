@@ -1,0 +1,204 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+:root {
+    --green: lightgreen;
+    --black: black;
+    --light-color: #666;
+    --box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all 0.2s linear;
+}
+
+html {
+    font-size: 62.5%;
+    overflow: auto;
+    scroll-padding-top: 5.5rem;
+    scroll-behavior: smooth;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    box-shadow: var(--box-shadow);
+}
+
+header .logo {
+    color: var(--black);
+    font-size: 2.5rem;
+    font-weight: bolder;
+}
+
+header .navbar a {
+    font-size: 1.7rem;
+    border-radius: .5rem;
+    padding: .5rem 1.5rem;
+    color: var(--light-color);
+}
+
+header .navbar a.active,
+header .navbar a:hover {
+    color: #fff;
+    background: orangered;
+}
+
+.icons i {
+    color: var(--black);
+    font-size: 1.7rem;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+main {
+    padding-top: 80px;
+}
+
+.checkout {
+    max-width: 700px;
+    margin: 20px auto;
+    background: #ffffff;
+    border-radius: .5rem;
+    box-shadow: var(--box-shadow);
+    padding: 20px 30px;
+}
+
+.checkout h2 {
+    font-size: 2.5rem;
+    color: orangered;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#cart-items-checkout p {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#checkout-total h3 {
+    font-size: 2rem;
+    text-align: right;
+    margin-top: 15px;
+    padding-top: 10px;
+    color: var(--black);
+    border-top: 1px solid #ddd;
+}
+
+/* Form Styling */
+#checkout-form {
+    margin-top: 20px;
+}
+
+#checkout-form h3 {
+    font-size: 2rem;
+    color: var(--black);
+    margin-bottom: 15px;
+}
+
+#checkout-form label {
+    display: block;
+    font-weight: bold;
+    color: #555;
+    margin: 10px 0 5px;
+}
+
+#checkout-form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: .3rem;
+    border: 1px solid #ddd;
+    font-size: 1.6rem;
+    color: #333;
+}
+
+#checkout-form button {
+    width: 100%;
+    padding: 1rem;
+    background: orangered;
+    color: white;
+    font-size: 1.6rem;
+    font-weight: bold;
+    border: none;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#checkout-form button:hover {
+    background: #ff5722;
+}
+
+/* Checkout Message */
+#checkout-message {
+    margin-top: 20px;
+    font-size: 1.6rem;
+    color: #28a745;
+    text-align: center;
+}
+
+/* Footer */
+.footer {
+    background: #24262b;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-col {
+    margin: 0 auto;
+}
+
+.footer-col h4 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: orangered;
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul a {
+    color: white;
+    font-size: 1.2rem;
+    text-decoration: none;
+}
+
+.footer-col ul a:hover {
+    color: orangered;
+}
+
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    header .navbar {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .checkout {
+        padding: 15px;
+    }
+}

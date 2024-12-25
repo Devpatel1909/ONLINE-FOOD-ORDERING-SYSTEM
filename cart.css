@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap');
+
+:root {
+    --green: lightgreen;
+    --black: black;
+    --light-color: #666;
+    --box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    text-decoration: none;
+    text-transform: capitalize;
+    transition: all 0.2s linear;
+}
+
+html {
+    font-size: 62.5%;
+    overflow: auto;
+    scroll-padding-top: 5.5rem;
+    scroll-behavior: smooth;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    padding: 1rem 7%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1000;
+    box-shadow: var(--box-shadow);
+}
+
+header .logo {
+    color: var(--black);
+    font-size: 2.5rem;
+    font-weight: bolder;
+}
+
+header .navbar a {
+    font-size: 1.7rem;
+    border-radius: .5rem;
+    padding: .5rem 1.5rem;
+    color: var(--light-color);
+}
+
+header .navbar a.active,
+header .navbar a:hover {
+    color: #fff;
+    background: orangered;
+}
+
+main {
+    padding-top: 80px; /* Adjust for fixed header */
+}
+
+.cart {
+    max-width: 1200px;
+    margin: 20px auto;
+    background: #ffffff;
+    border-radius: .5rem;
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+}
+
+.cart h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: orangered;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #f4f4f4;
+}
+
+table td input[type="number"] {
+    width: 60px;
+    padding: .5rem;
+    border: 1px solid #ddd;
+    border-radius: .3rem;
+}
+
+table .remove-btn {
+    background: orangered;
+    color: white;
+    border: none;
+    padding: .5rem 1rem;
+    border-radius: .3rem;
+    cursor: pointer;
+}
+
+table .remove-btn:hover {
+    background: #ff5722;
+}
+
+tfoot tr {
+    font-weight: bold;
+}
+
+tfoot td {
+    text-align: right;
+}
+
+.checkout-button {
+    display: block;
+    margin: 20px auto;
+    padding: 1rem 2rem;
+    background: orangered;
+    color: white;
+    border: none;
+    border-radius: .5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.checkout-button:hover {
+    background: #ff5722;
+}
+
+.footer {
+    background: #24262b;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-col {
+    margin: 0 auto;
+}
+
+.footer-col h4 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: orangered;
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.footer-col ul a:hover {
+    color: orangered;
+}
+
+/* Side Cart Button */
+.side-cart {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 1000;
+}
+
+.side-cart a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.1em;
+    color: white;
+    background-color: orangered;
+    padding: 20px;
+    border-radius: 50%;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0. 3);
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.side-cart a:hover {
+    background-color: #ff5722;
+    transform: scale(1.1);
+}

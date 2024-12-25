@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <link rel="stylesheet" href="payment.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <!-- Add Razorpay SDK -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+
+<header>
+    <div class="logo">Payment <i class="fas fa-credit-card"></i></div>
+    <nav class="navbar"></nav>
+    <div class="icons">
+        <i class="fas fa-user"></i>
+        <i class="fas fa-heart"></i>
+    </div>
+</header>
+
+<main>
+    <section class="payment">
+        <h2>Complete Your Payment</h2>
+        <div class="payment-content">
+            <div class="payment-instruction">
+                <p>Use Razorpay To Complete Payment</p>
+            </div>
+            <div class="payment-note">
+                <p>Your total amount: <strong id="total-amount">₹0.00</strong></p>
+                <button id="done-btn" class="done-btn">Pay with Razorpay</button>
+                <p>Once the payment is completed, your order will be processed.</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer">
+        <div class="footer-col">
+            <h4>About Us</h4>
+            <ul>
+                <li><a href="#">Our Story</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <ul>
+                <li><a href="#">Email Us</a></li>
+                <li><a href="#">Support</a></li>
+                <li><a href="#">FAQs</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js';
+    import { getDatabase, ref, set, onValue } from 'https://www.gstatic.com/firebasejs/11.0.1/firebase-database.js';
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyA1nqC_pVbB7Gfg8zFPD9_bLw_SHTTYD-g",
+        authDomain: "online-food-delivry-system.firebaseapp.com",
+        databaseURL: "https://online-food-delivry-system-default-rtdb.firebaseio.com",
+        projectId: "online-food-delivry-system",
+        storageBucket: "online-food-delivry-system.firebasestorage.app",
+        messagingSenderId: "713835347104",
+        appId: "1:713835347104:web:cdeccdb1a103a113cc5dc5",
+        measurementId: "G-VV8LJFFMND"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+
+    emailjs.init("Ak6S8vvdfPPl1T1Az");
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const totalAmount = localStorage.getItem('checkoutTotal') || '0.00';
+        document.getElementById('total-amount').textContent = `₹${totalAmount}`;
+
+        const doneButton = document.getElementById('done-btn');
+
+        doneButton.addEventListener('click', function() {
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    initiateRazorpayPayment(user, totalAmount);
+                } else {
+                    alert('You must be logged in to make a payment.');
+                }
+            });
+        });
+    });
+
+    function initiateRazorpayPayment(user, amount) {
+    // Ensure the amount is parsed as a float
+    amount = parseFloat(amount);
+    
+    // Check if the amount is a valid number, if not, set to a default value (e.g., 1 rupee for testing)
+    if (isNaN(amount) || amount <= 0) {
+        console.error("Invalid amount detected. Setting default value of 1 rupee.");
+        amount = 1;
+    }
+
+    const options = {
+        "key": "rzp_test_MROXehDjgEE6jH",
+        "amount": Math.round(amount * 100), // Convert to paise
+        "currency": "INR",
+        "name": "Online Food Delivery",
+        "description": "Order Payment",
+        "handler": function (response) {
+            alert('Payment Successful!');
+            sendEmailConfirmation(user);
+        },
+        "prefill": {
+            "name": user.displayName,
+            "email": user.email,
+        },
+        "theme": {
+            "color": "#F37254"
+        }
+    };
+
+    console.log("Initiating Razorpay with amount (in rupee):", options.amount);
+
+    const razorpay = new Razorpay(options);
+    razorpay.open();
+}
+
+
+
+    function sendEmailConfirmation(user) {
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        let productDetails = '';
+        cartItems.forEach(item => {
+            productDetails += `Product: ${item.name}, Quantity: ${item.quantity}, Total: ₹${(item.price * item.quantity).toFixed(2)}\n`;
+        });
+
+        const emailParams = {
+            from_name: user.displayName || 'Guest',
+            from_email: user.email,
+            total_amount: localStorage.getItem('checkoutTotal'),
+            products: productDetails
+        };
+
+        emailjs.send('service_e8ew5is', 'template_ctx4uen', emailParams)
+            .then(function(response) {
+                alert('Order placed and confirmation email sent!');
+                localStorage.removeItem('cartItems'); // Clear cart after confirmation
+                window.location.href = "thanku.html"; // Redirect to Thank You page
+            }, function(error) {
+                alert('Error sending confirmation email.');
+            });
+    }
+</script>
+
+</body>
+</html>

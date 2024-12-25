@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="checkout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+<header>
+    <div class="logo">My Shop <i class="fas fa-shopping-cart"></i></div>
+    <nav class="navbar"></nav>
+    <div class="icons">
+        <i class="fas fa-user"></i>
+        <i class="fas fa-heart"></i>
+    </div>
+</header>
+
+<main>
+    <section class="checkout">
+        <h2>Checkout</h2>
+        <div class="checkout-content">
+            <div id="cart-items-checkout">
+                <!-- Cart items will be dynamically added here -->
+            </div>
+            <div id="checkout-total">
+                <h3>Total: <span id="checkout-cart-total">₹0.00</span></h3>
+            </div>
+            <form id="checkout-form">
+                <h3>Shipping Information</h3>
+                <label for="name">Name:</label>
+                <input type="text" id="name" placeholder="Your Name" required>
+
+                <label for="address">Address:</label>
+                <input type="text" id="address" placeholder="Street Address" required>
+
+                <label for="city">City:</label>
+                <input type="text" id="city" placeholder="City" required>
+
+                <label for="state">State:</label>
+                <input type="text" id="state" placeholder="State" required>
+
+                <label for="zip">Zip Code:</label>
+                <input type="text" id="zip" placeholder="Zip Code" required>
+
+                <button type="button" class="checkout-button" onclick="proceedToPayment()">Proceed to Payment</button>
+            </form>
+            <div id="checkout-message" style="display: none;"></div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer">
+        <div class="footer-col">
+            <h4>About Us</h4>
+            <ul>
+                <li><a href="#">Our Story</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>Contact</h4>
+            <ul>
+                <li><a href="#">Email Us</a></li>
+                <li><a href="#">Support</a></li>
+                <li><a href="#">FAQs</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Function to update checkout display and store the total in localStorage
+    function updateCheckout() {
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        const cartItemsContainer = document.getElementById('cart-items-checkout');
+        const checkoutTotal = document.getElementById('checkout-cart-total');
+        let total = 0;
+
+        // Clear existing items
+        cartItemsContainer.innerHTML = '';
+
+        // Add each cart item as a row
+        cartItems.forEach(item => {
+            const itemTotal = item.price * item.quantity;
+            total += itemTotal;
+
+            const row = document.createElement('div');
+            row.classList.add('checkout-item');
+            row.innerHTML = `
+                <p><strong>${item.name}</strong></p>
+                <p>Quantity: ${item.quantity}</p>
+                <p>Price: ₹${item.price.toFixed(2)}</p>
+                <p>Total: ₹${itemTotal.toFixed(2)}</p>
+            `;
+            cartItemsContainer.appendChild(row);
+        });
+
+        // Update the total in the checkout page with the rupee symbol
+        checkoutTotal.textContent = `₹${total.toFixed(2)}`;
+
+        // Store the total in localStorage to be used on the payment page
+        localStorage.setItem('checkoutTotal', total.toFixed(2));
+    }
+
+    // Function to handle redirection to payment page
+    function proceedToPayment() {
+        const name = document.getElementById('name').value;
+        const address = document.getElementById('address').value;
+        const city = document.getElementById('city').value;
+        const state = document.getElementById('state').value;
+        const zip = document.getElementById('zip').value;
+
+        if (name && address && city && state && zip) {
+            // Proceed to the payment page
+            window.location.href = 'payment.html';
+        } else {
+            alert('Please fill in all the required fields.');
+        }
+    }
+
+    // Initialize checkout display on page load
+    document.addEventListener('DOMContentLoaded', updateCheckout);
+</script>
+
+</body>
+</html>
