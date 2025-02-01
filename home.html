@@ -432,6 +432,40 @@
     function myloader(){
         preloader.style.display = "none";
     }
+async function updateInventoryAfterPayment() {
+    const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+    for (const item of cartItems) {
+        const itemRef = ref(database, `inventory/${item.id}`);
+        try {
+            const snapshot = await get(itemRef);
+            if (snapshot.exists()) {
+                const currentStock = snapshot.val().stock || 0;
+                const newStock = Math.max(currentStock - item.quantity, 0);
+
+                // If the item stock reaches zero, we proceed to remove it from the inventory
+                if (newStock === 0 && item.quantity > currentStock) {
+                    alert(`Item out of stock: ${item.name}`);
+                }
+
+                // Update stock to the new value
+                await update(itemRef, { stock: newStock });
+
+                // If the stock is zero, remove the item from the inventory
+                if (newStock === 0) {
+                    await remove(itemRef); // This will remove the item from the database
+                    console.log(`Item removed from inventory: ${item.name}`);
+                } else {
+                    console.log(`Stock updated for item: ${item.name}`);
+                }
+            } else {
+                console.error(`Item not found in inventory: ${item.name}`);
+            }
+        } catch (error) {
+            console.error(`Error updating stock for item: ${item.name}`, error);
+        }
+    }
+}
 
     </script>
     
